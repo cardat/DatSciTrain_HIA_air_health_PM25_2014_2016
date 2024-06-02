@@ -44,4 +44,6 @@ output_results <- rbind(output_results, data.frame(resultV3))
 
 
 }
-output_results
+
+## remove the non-populated areas
+output_results <- output_results[output_results$attributable_number > 0,]
