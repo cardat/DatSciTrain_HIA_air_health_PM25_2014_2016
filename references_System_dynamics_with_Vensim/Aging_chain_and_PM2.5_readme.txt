@@ -1,0 +1,4 @@
+This tool is still in test development phase.
+Developed by Ivan Hanigan with assistance from Prof Barry Newell.
+
+MIT licence applies and CC licence for attribution.
