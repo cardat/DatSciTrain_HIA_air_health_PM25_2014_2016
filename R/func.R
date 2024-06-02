@@ -2,9 +2,7 @@
 'name:code/func.R'
 #### functions ####
 library(sf)
-# vale our deprecated friends
-# library(rgdal)
-# library(rgeos)
+library(leaflet)
 library(raster)
 library(foreign)
 library(sqldf)

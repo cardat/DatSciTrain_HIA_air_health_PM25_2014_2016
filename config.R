@@ -1,5 +1,5 @@
 ## Make your selections here
-state <- "ACT"
+state <- "WA"
 timepoints <- 2014:2016
 
 # health_impact_function
@@ -8,13 +8,6 @@ rr_lci <- 1.040
 rr_uci <- 1.083
 # this is a RR per 10 unit change
 unit_change <- 10
-beta <- log(rr)/unit_change
-beta
-## so if x = 10
-x <- 10
-exp(beta * x)
-## or alternately
-rr^(x/10)
 
 ## what counterfactual method to use?  NB only regional minimum implemented here. 
 ## review R/load_enviro_monitor_model_counterfactual_linked.R to change this
@@ -24,8 +17,10 @@ do_env_counterfactual <- "min"
 # OR CLOUD-CARDAT
 datadir <- "C:/Users/287658C/Nextcloud/Environment_General"
 
-# optional setting for a sub-state region, not tested
+# optional setting for a sub-state region
+## currently only works for SA3s 
 specific_stdy_reg <- FALSE
+specific_sa3_code <- NA
 
 ## mb
 indir_mb <- file.path(datadir,  sprintf("ABS_data/ABS_meshblocks/abs_meshblocks_2016_data_provided/"))

@@ -2,18 +2,19 @@
 'name:code/load_pops_mb'
 
 shp <- st_read(file.path(indir_mb, infile_mb))
-# 
-if(specific_stdy_reg){
-  todo <- foreign::read.dbf(stdy_reg)
-  ## names(todo)
-  ## names(shp)
-  shp2 <- shp[shp@data$SA3_CODE16 %in% todo$SA3_CODE16,]
-  ##
-  ##plot(shp2)
-  
-} else {
+# NOT IMPLEMENTED, THIS CODE ASSUMES PEOPLE WANT TO SUPPLY A SPATIAL FILE WITH THEIR SELECTION
+# AT THIS TIME WE FIND MOST PEOPLE ARE HAPPY SELECTING A SINGLE SA3 CODE
+# if(specific_stdy_reg){
+#   todo <- foreign::read.dbf(stdy_reg)
+#   ## names(todo)
+#   ## names(shp)
+#   shp2 <- shp[shp@data$SA3_CODE16 %in% todo$SA3_CODE16,]
+#   ##
+#   ##plot(shp2)
+#   
+# } else {
   shp2 <- shp
-}
+# }
 
 ## population
 

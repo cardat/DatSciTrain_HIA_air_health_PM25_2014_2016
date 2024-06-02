@@ -12,7 +12,6 @@ head(dths_expectedV4)
 
 dths_expectedV4$attributable <-  (exp(beta * dths_expectedV4$pm25_anthro_pw) - 1) * dths_expectedV4$expected
 
-## TODO summarise to just the GMR of Melb and compare against richard
 dths_attr <- data.table(dths_expectedV4)
 dths_attrV2 <- dths_attr[,.(pop_tot = sum(value, na.rm = T),
                             expected_tot = sum(expected, na.rm = T),
@@ -33,7 +32,6 @@ dths_attrV3 <- dths_attrV2[,.(pop_tot_sa3 = sum(pop_tot, na.rm = T),
                            by = .(SA3)
                            ]
 head(dths_attrV3, 20)
-## sa3 20901 is Banyule with estimate 15.5 (Broome's estimate was 14)
 
 sa3 <- st_read(file.path(indir_sa3, infile_sa3))
 head(sa3)

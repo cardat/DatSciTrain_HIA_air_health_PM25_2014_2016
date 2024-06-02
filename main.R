@@ -2,27 +2,36 @@
 # A demonstration of a simple pipeline for mortality attributable to long-term air pollution exposure
 # ivanhanigan
 
-# ## IMPORTANT: set your project working directory
-# projdir <- "~/"
-#  # e.g. use getwd() and pwd etc to find your path, then copy and past it here"
-# setwd(projdir)
-# install the required packages, if you need to
+#### install the required packages ####
+## if you need to
 install_pkg_flag <- FALSE
 if(install_pkg_flag){
   install.packages("sf")
-  #install.packages("rgdal") # deprecated package
-  #install.packages("rgeos") # deprecated package
   install.packages("raster")
   install.packages("foreign")
   install.packages("sqldf")
   install.packages("dplyr")
   install.packages("data.table")
   install.packages("reshape")
+  install.packages("leaflet")
 }
 ## load packages
 source("R/func.R")
-## load settings
+
+#### load settings ####
 source("config.R")
+## the default settings are to run this pipeline for a state or territory of Aust
+## if you want to look at a specific SA3 run the following
+## and edit the config
+#### identify study region #### 
+source("R/do_stdy_region_select.R")
+## if you choose to change the configuration 
+## go to config.R
+## then change specific_stdy_reg <- TRUE
+## and specify which SA3 you want to assess (specific_sa2_code)
+## AND MAKE SURE TO RELOAD THE UPDATED CONFIG FILE
+source("config.R")
+
 ## create folders needed to store working files and results
 if(!dir.exists("working_temporary")) dir.create("working_temporary")
 if(!dir.exists("figures_and_tables")) dir.create("figures_and_tables")
@@ -47,11 +56,15 @@ for(timepoint in timepoints){
 
 #### summary tables ####
 source("R/do_summary_tables.R")
-output_results[,
-               c('run', 'STE_NAME16', 'GCC_NAME16', 'attributable_number', 'pop_total', 'pm25_anthro_pw_gcc', 'pm25_pw_gcc', 'rate_per_1000000')]
-
+if(specific_stdy_reg){
+  output_results[,
+                 c('run', 'STE_NAME16', 'GCC_NAME16', "SA3_NAME16", 'attributable_number', 'pop_total', 'pm25_anthro_pw_gcc', 'pm25_pw_gcc', 'rate_per_100000')]  
+} else {
+  output_results[,
+                 c('run', 'STE_NAME16', 'GCC_NAME16', 'attributable_number', 'pop_total', 'pm25_anthro_pw_gcc', 'pm25_pw_gcc', 'rate_per_100000')]
+}
 ## write out and keep record of runs
-write.csv(output_results[,c(8,1:7)], 
+write.csv(output_results, 
           sprintf("figures_and_tables/results_%s.csv", make.names(Sys.time())), 
           row.names = F)
 
