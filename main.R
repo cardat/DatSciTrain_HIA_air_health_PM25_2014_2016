@@ -2,10 +2,7 @@
 # A demonstration of a simple pipeline for mortality attributable to long-term air pollution exposure
 # ivanhanigan
 
-#### install the required packages ####
-## if you need to force installations set this
-force_install_pkgs <- FALSE
-## load packages
+#### install/load the required packages ####
 source("R/func.R")
 
 #### load settings ####

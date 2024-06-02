@@ -1,18 +1,36 @@
-if(force_install_pkgs){
-  install.packages("sf")
-  install.packages("raster")
-  install.packages("foreign")
-  install.packages("sqldf")
-  install.packages("dplyr")
-  install.packages("data.table")
-  install.packages("reshape")
-  install.packages("leaflet")
+## install the cran packages, if not already avalailable
+load_packages <- function(pkg = c("targets",
+                                  "data.table"),
+                          do_it = T, force_install = F){
+  
+  
+  if(do_it){
+    if (force_install){ 
+      install.packages(pkg, dependencies = TRUE)
+    }
+    
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)){ 
+      install.packages(new.pkg, dependencies = TRUE)
+    }
+    
+    sapply(pkg, require, character.only = TRUE)
+  }
 }
-library(sf)
-library(leaflet)
-library(raster)
-library(foreign)
-library(sqldf)
-library(dplyr)
-library(data.table)
-library(reshape)
+load_packages(c(
+"sf",
+"leaflet",
+"raster",
+"foreign",
+"sqldf",
+"dplyr",
+"data.table",
+"reshape"))
+
+## this is a github package
+reinstall_iomlifetR <- T
+if(reinstall_iomlifetR){
+  if(!require(devtools)) install.packages("devtools"); library(devtools)
+  install_github("richardbroome2002/iomlifetR", build_vignettes = TRUE)  
+}
+library(iomlifetR)
