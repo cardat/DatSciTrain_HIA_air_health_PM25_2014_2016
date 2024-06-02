@@ -8,6 +8,8 @@ rr_lci <- 1.040
 rr_uci <- 1.083
 # this is a RR per 10 unit change
 unit_change <- 10
+beta <- log(rr)/unit_change
+beta
 
 ## what counterfactual method to use?  NB only regional minimum implemented here. 
 ## review R/load_enviro_monitor_model_counterfactual_linked.R to change this

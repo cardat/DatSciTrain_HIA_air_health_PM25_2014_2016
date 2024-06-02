@@ -1,6 +1,13 @@
-
-'name:code/func.R'
-#### functions ####
+if(force_install_pkgs){
+  install.packages("sf")
+  install.packages("raster")
+  install.packages("foreign")
+  install.packages("sqldf")
+  install.packages("dplyr")
+  install.packages("data.table")
+  install.packages("reshape")
+  install.packages("leaflet")
+}
 library(sf)
 library(leaflet)
 library(raster)

@@ -3,27 +3,20 @@
 # ivanhanigan
 
 #### install the required packages ####
-## if you need to
-install_pkg_flag <- FALSE
-if(install_pkg_flag){
-  install.packages("sf")
-  install.packages("raster")
-  install.packages("foreign")
-  install.packages("sqldf")
-  install.packages("dplyr")
-  install.packages("data.table")
-  install.packages("reshape")
-  install.packages("leaflet")
-}
+## if you need to force installations set this
+force_install_pkgs <- FALSE
 ## load packages
 source("R/func.R")
 
 #### load settings ####
+## this sets all the data sources and global variables
 source("config.R")
+
+#### identify specific study region #### 
+## OPTIONAL
 ## the default settings are to run this pipeline for a state or territory of Aust
 ## if you want to look at a specific SA3 run the following
 ## and edit the config
-#### identify study region #### 
 source("R/do_stdy_region_select.R")
 ## if you choose to change the configuration 
 ## go to config.R
@@ -32,10 +25,12 @@ source("R/do_stdy_region_select.R")
 ## AND MAKE SURE TO RELOAD THE UPDATED CONFIG FILE
 source("config.R")
 
+#### data management settings ####
 ## create folders needed to store working files and results
 if(!dir.exists("working_temporary")) dir.create("working_temporary")
 if(!dir.exists("figures_and_tables")) dir.create("figures_and_tables")
 
+#### do the HIA pipeline ####
 for(timepoint in timepoints){
   ## for testing set this and don't loop
   ## timepoint <- 2015
