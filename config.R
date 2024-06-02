@@ -15,9 +15,10 @@ beta
 ## review R/load_enviro_monitor_model_counterfactual_linked.R to change this
 do_env_counterfactual <- "min"
 
-# COESRA: datadir <- "/home/public_share_data/ResearchData_Train_DataScience/HIA_Health_Impact_Assessments/HIA_workshop_2021/data_provided"
+# COESRA: 
+datadir <- "../data_provided"
 # OR CLOUD-CARDAT
-datadir <- "C:/Users/287658C/Nextcloud/Environment_General"
+# datadir <- "cloud-car-dat/Environment_General"
 
 # optional setting for a sub-state region
 ## currently only works for SA3s 
