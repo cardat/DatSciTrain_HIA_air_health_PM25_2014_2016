@@ -18,6 +18,7 @@ source("config.R")
 ## if you want to look at a specific SA3 run the following
 ## and edit the config
 source("R/do_stdy_region_select.R")
+show_map
 ## if you choose to change the configuration 
 ## go to config.R
 ## then change specific_stdy_reg <- TRUE

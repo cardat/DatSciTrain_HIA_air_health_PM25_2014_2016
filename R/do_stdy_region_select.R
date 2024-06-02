@@ -10,7 +10,7 @@ suburb_popup <- paste0(
   
 )
 
-leaflet(data = sf_an) %>% 
+show_map <- leaflet(data = sf_an) %>% 
   addProviderTiles("CartoDB.Positron") %>%
   addPolygons(fillColor = 'lightgreen', 
               fillOpacity = 0.6, 
@@ -20,5 +20,5 @@ leaflet(data = sf_an) %>%
               group = "SA3")  %>%
   addScaleBar("bottomright", options = scaleBarOptions(metric = T)) %>%
   fitBounds(bounds[["xmin"]], bounds[["ymin"]], bounds[["xmax"]], bounds[["ymax"]])
-
+ 
 
