@@ -83,6 +83,25 @@ cf_ste <- dths_expected_lifetableV3[,.(pm25_pw_sa3=mean(pm25_pw_sa3),
 
 le <- burden_le(demog_data_ste, pm_concentration = cf_ste$pm25_anthro_pw_sa3, RR = 1.06)
 le
+# We can check this method against the spreadsheet
+# first we need to estimate the age 0-1
+# simplest assumption is to divide by 5
+demog_data_ste_for_s_sheet <- demog_data_ste[1,]
+demog_data_ste_for_s_sheet$population <- demog_data_ste[1,"population"]/5
+demog_data_ste_for_s_sheet$deaths <- demog_data_ste[1,"deaths"]/5
+
+demog_data_ste_for_s_sheet2 <- demog_data_ste[1,]
+demog_data_ste_for_s_sheet2$age <- 1
+demog_data_ste_for_s_sheet2$population <- (demog_data_ste[1,"population"]/5)*4
+demog_data_ste_for_s_sheet2$deaths <- (demog_data_ste[1,"deaths"]/5)*4
+
+demog_data_ste_for_s_sheet <- rbind(demog_data_ste_for_s_sheet, demog_data_ste_for_s_sheet2)
+demog_data_ste_for_s_sheet <- rbind(demog_data_ste_for_s_sheet, demog_data_ste[2:nrow(demog_data_ste),])
+demog_data_ste_for_s_sheet$n <- c(1, 4, rep(5, nrow(demog_data_ste)-2), 11)
+demog_data_ste_for_s_sheet$ax <- c(.1, rep(.5, nrow(demog_data_ste)))
+demog_data_ste_for_s_sheet_output <- demog_data_ste_for_s_sheet[,.(age, n, ax, population, deaths)]
+
+write.csv(demog_data_ste_for_s_sheet_output, file.path("references_Lifetables_with_spreadsheet", sprintf("lifetable_demog_data_ste_%s_%s.csv", state, timepoint)), row.names = F)
 
 # we can then extend further and look at the difference
 # sum(burden_an(demog_data_ste, pm_concentration = cf_ste$pm25_anthro_pw_sa3, RR = 1.06))
