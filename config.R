@@ -2,8 +2,8 @@
 state <- "VIC"
 # optional setting for a sub-state region
 ## currently only works for SA3s 
-specific_stdy_reg <- TRUE
-specific_sa3_code <- 20605
+specific_stdy_reg <- FALSE
+specific_sa3_code <- NA
 ## AND MAKE SURE TO UPDATE THE STATE TO MATCH THE SA3
 
 timepoints <- 2014:2016
