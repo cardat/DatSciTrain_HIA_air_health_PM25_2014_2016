@@ -83,7 +83,10 @@ cf_ste <- dths_expected_lifetableV3[,.(pm25_pw_sa3=mean(pm25_pw_sa3),
 
 le <- burden_le(demog_data_ste, pm_concentration = cf_ste$pm25_anthro_pw_sa3, RR = 1.06)
 le
+
 # We can check this method against the spreadsheet
+do_qc_le <- FALSE
+if(do_qc_le){
 # first we need to estimate the age 0-1
 # simplest assumption is to divide by 5
 demog_data_ste_for_s_sheet <- demog_data_ste[1,]
@@ -102,6 +105,9 @@ demog_data_ste_for_s_sheet$ax <- c(.1, rep(.5, nrow(demog_data_ste)))
 demog_data_ste_for_s_sheet_output <- demog_data_ste_for_s_sheet[,.(age, n, ax, population, deaths)]
 
 write.csv(demog_data_ste_for_s_sheet_output, file.path("references_Lifetables_with_spreadsheet", sprintf("lifetable_demog_data_ste_%s_%s.csv", state, timepoint)), row.names = F)
+}
 
-# we can then extend further and look at the difference
+#### use iomlifetr to check ANs
+# we can then extend further and look at the difference to our calculations
 # sum(burden_an(demog_data_ste, pm_concentration = cf_ste$pm25_anthro_pw_sa3, RR = 1.06))
+# most likely source of difference is averaging the counterfactual over all SA3s

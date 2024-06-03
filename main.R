@@ -64,4 +64,8 @@ write.csv(output_results,
 
 #### demonstrate a life expectency study ####
 source("R/do_life_expectancy.R")
-le
+# print the estimated change in life expectancy and YLL
+le[["difference"]]
+# print the two lifetables
+le[["baseline"]] 
+le[["impacted"]]
