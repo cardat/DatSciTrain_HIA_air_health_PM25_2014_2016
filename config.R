@@ -1,5 +1,5 @@
 ## Make your selections here (NSW, VIC, ACT, WA, NT, SA, QLD, TAS)
-state <- "VIC"
+state <- "WA"
 # optional setting for a sub-state region
 ## currently only works for SA3s 
 specific_stdy_reg <- FALSE

@@ -71,6 +71,8 @@ write.csv(output_results,
 source("R/do_life_expectancy.R")
 # print the estimated change in life expectancy and YLL
 le[["difference"]]
+# for a counterfactual reduction of 
+cf_ste
 # print the two lifetables
 le[["baseline"]] 
 le[["impacted"]]
