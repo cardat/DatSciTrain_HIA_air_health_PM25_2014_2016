@@ -1,5 +1,11 @@
-## Make your selections here
-state <- "WA"
+## Make your selections here (NSW, VIC, ACT, WA, NT, SA, QLD, TAS)
+state <- "VIC"
+# optional setting for a sub-state region
+## currently only works for SA3s 
+specific_stdy_reg <- TRUE
+specific_sa3_code <- 20605
+## AND MAKE SURE TO UPDATE THE STATE TO MATCH THE SA3
+
 timepoints <- 2014:2016
 
 # health_impact_function
@@ -20,10 +26,7 @@ datadir <- "../data_provided"
 # OR CLOUD-CARDAT
 # datadir <- "cloud-car-dat/Environment_General"
 
-# optional setting for a sub-state region
-## currently only works for SA3s 
-specific_stdy_reg <- FALSE
-specific_sa3_code <- NA
+
 
 ## mb
 indir_mb <- file.path(datadir,  sprintf("ABS_data/ABS_meshblocks/abs_meshblocks_2016_data_provided/"))

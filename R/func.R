@@ -27,10 +27,4 @@ load_packages(c(
 "data.table",
 "reshape"))
 
-## this is a github package
-reinstall_iomlifetR <- T
-if(reinstall_iomlifetR){
-  if(!require(devtools)) install.packages("devtools"); library(devtools)
-  install_github("richardbroome2002/iomlifetR", build_vignettes = TRUE)  
-}
-library(iomlifetR)
+

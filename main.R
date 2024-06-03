@@ -20,7 +20,8 @@ show_map
 ## go to config.R
 ## then change specific_stdy_reg <- TRUE
 ## and specify which SA3 you want to assess (specific_sa2_code)
-## AND MAKE SURE TO RELOAD THE UPDATED CONFIG FILE
+## AND MAKE SURE TO UPDATE THE STATE TO MATCH THE SA3
+## THEN RELOAD THE UPDATED CONFIG FILE
 source("config.R")
 
 #### data management settings ####

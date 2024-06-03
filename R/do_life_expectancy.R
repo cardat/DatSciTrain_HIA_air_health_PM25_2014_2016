@@ -3,6 +3,15 @@
 ## which is to assess the years of life lost, and change in life expectancy for children
 ## NB codes have *not* been thoroughly checked
 ## ivanhanigan 2024-06-03
+
+## this is a github package
+reinstall_iomlifetR <- T
+if(reinstall_iomlifetR){
+  if(!require(devtools)) install.packages("devtools"); library(devtools)
+  install_github("richardbroome2002/iomlifetR", build_vignettes = TRUE)  
+}
+library(iomlifetR)
+
 outdir <- "working_temporary"
 
 # head(deathV4)
@@ -29,10 +38,10 @@ dths_expected_lifetable <- dths_expected[,.(deaths = sum(expected),
 
 # dths_expected_lifetable[SA2_MAINCODE_2016 == 511031281,]
 
-## join with the GCC/SA3 codes
-
-flist <- dir("figures_and_tables", pattern = "attributable")
-# fi <- flist[1]
+#### join with the GCC/SA3 codes ####
+flist <- dir("figures_and_tables", pattern = paste0("attributable_", state))
+## Choose your input
+fi <- flist[1]
 result <- read.csv(file.path("figures_and_tables", fi), as.is = T)
 # str(result)
 setDT(result)
