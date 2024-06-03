@@ -16,6 +16,10 @@ source("config.R")
 ## and edit the config
 source("R/do_stdy_region_select.R")
 show_map
+## ALTERNATIVE if RStudio viewer does not work
+# htmlwidgets::saveWidget(show_map, "stdy_region_select.html")
+# browseURL("stdy_region_select.html")
+
 ## if you choose to change the configuration 
 ## go to config.R
 ## then change specific_stdy_reg <- TRUE
