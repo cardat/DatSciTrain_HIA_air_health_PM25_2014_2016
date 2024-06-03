@@ -1,6 +1,7 @@
 # create an interactive map of SA3s
 sf_an <- st_read(file.path(indir_sa3, infile_sa3))
 sf_an <- st_transform(sf_an, '+proj=longlat +datum=WGS84')
+sf_an <- st_simplify(sf_an[!st_is_empty(sf_an),], dTolerance = 100)
 # get bounds of sf object
 bounds <- st_bbox(sf_an)
 
