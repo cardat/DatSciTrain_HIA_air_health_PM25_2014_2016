@@ -47,7 +47,7 @@ for(timepoint in timepoints){
   
 }
 
-#### summary tables ####
+#### summary tables AN ####
 source("R/do_summary_tables.R")
 if(specific_stdy_reg){
   output_results[,
@@ -62,3 +62,6 @@ write.csv(output_results,
           row.names = F)
 
 
+#### demonstrate a life expectency study ####
+source("R/do_life_expectancy.R")
+le

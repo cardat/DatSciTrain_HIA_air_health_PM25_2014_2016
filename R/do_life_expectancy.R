@@ -5,21 +5,21 @@
 ## ivanhanigan 2024-06-03
 outdir <- "working_temporary"
 
-head(deathV4)
-head(indat_popV2)
+# head(deathV4)
+# head(indat_popV2)
 
 mrg_dth_pop <- merge(deathV4, indat_popV2, by = "Age")
 mrg_dth_popV2 <- mrg_dth_pop[,c("SA2_MAINCODE_2016", "Age", "variable", "value", "rate")]
 qc <- data.frame(table(mrg_dth_popV2$SA2_MAINCODE_2016))
-nrow(qc)
+# nrow(qc)
 
-head(mrg_dth_popV2)
+# head(mrg_dth_popV2)
 mrg_dth_popV2$expected <- mrg_dth_popV2$value * mrg_dth_popV2$rate
 
 dths_expected <- data.table(mrg_dth_popV2[mrg_dth_popV2$Age != "All ages",])
 dths_expectedV2 <- dths_expected[,.(deaths = sum(expected)), .(SA2_MAINCODE_2016)]
 
-paste(names(table(dths_expected$Age)), sep = "", collapse = "', '")
+# paste(names(table(dths_expected$Age)), sep = "", collapse = "', '")
 
 #### create a lifetable for each SA2 ####
 dths_expected_lifetable <- dths_expected[,.(deaths = sum(expected),
@@ -27,17 +27,17 @@ dths_expected_lifetable <- dths_expected[,.(deaths = sum(expected),
                                          .(SA2_MAINCODE_2016,
                                            Age)]
 
-dths_expected_lifetable[SA2_MAINCODE_2016 == 511031281,]
+# dths_expected_lifetable[SA2_MAINCODE_2016 == 511031281,]
 
 ## join with the GCC/SA3 codes
 
 flist <- dir("figures_and_tables", pattern = "attributable")
-fi <- flist[1]
+# fi <- flist[1]
 result <- read.csv(file.path("figures_and_tables", fi), as.is = T)
-str(result)
+# str(result)
 setDT(result)
 
-str(dths_expected_lifetable)
+# str(dths_expected_lifetable)
 dths_expected_lifetable$SA3 <- as.integer(substr(dths_expected_lifetable$SA2_MAINCODE_2016, 1, 5))
 dths_expected_lifetableV2 <- dths_expected_lifetable[,.(population=sum(pop),
                                                         deaths=sum(deaths)),
@@ -52,11 +52,11 @@ demog_data_ste <- dths_expected_lifetableV3[,.(
   deaths = sum(deaths)
 ), by = .(agecat = Age)]
 ## recode to the first age, by hand this time
-paste(demog_data_ste$agecat, sep = "", collapse = "', '")
+# paste(demog_data_ste$agecat, sep = "", collapse = "', '")
 demog_data_ste$age <- as.numeric(c('0', '10', '100', '15', '20', '25', '30', '35', '40', '45', '5', '50', '55', '60', '65', '70', '75', '80', '85', '90', '95'))
 demog_data_ste <- demog_data_ste[order(age)]
 demog_data_ste$age_agg <- c(demog_data_ste$age[1:17], rep(85, 4))
-demog_data_ste
+# demog_data_ste
 demog_data_ste <- demog_data_ste[,
                          .(
                            population = sum(population),
@@ -64,9 +64,9 @@ demog_data_ste <- demog_data_ste[,
                          )
                          , by = .(age = age_agg)
 ]
-demog_data_ste
-# qc 
-demog_data_ste[,.(pop_15 = sum(population), deaths_15 = sum(deaths))]
+# demog_data_ste
+# # qc 
+# demog_data_ste[,.(pop_15 = sum(population), deaths_15 = sum(deaths))]
 "    pop_15 deaths_15
      <int>     <num>
 1: 2,474,394     14,666"
@@ -79,7 +79,10 @@ demog_data_ste[,.(pop_15 = sum(population), deaths_15 = sum(deaths))]
 #### get the delta pm change
 cf_ste <- dths_expected_lifetableV3[,.(pm25_pw_sa3=mean(pm25_pw_sa3),
                              pm25_anthro_pw_sa3 = mean(pm25_anthro_pw_sa3))]
-cf_ste
+# cf_ste
 
 le <- burden_le(demog_data_ste, pm_concentration = cf_ste$pm25_anthro_pw_sa3, RR = 1.06)
 le
+
+# we can then extend further and look at the difference
+# sum(burden_an(demog_data_ste, pm_concentration = cf_ste$pm25_anthro_pw_sa3, RR = 1.06))
