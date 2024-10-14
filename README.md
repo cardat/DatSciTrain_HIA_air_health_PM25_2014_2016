@@ -10,4 +10,4 @@ The associated slideshow from the HEAL Future Leaders course in Canberra, June 4
 
 Caveat: It should be noted that the repository may contain content owned by others. Where possible citations for the content are provided.
 
-we weill rewrite the targets.
+We will rewrite the targets.
